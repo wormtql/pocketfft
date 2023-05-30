@@ -18,7 +18,7 @@ jobs:
       id: build
       with:
         arch: aarch64
-        distro: ubuntu_latest
+        distro: ubuntu_devel
         setup: |
           mkdir -p "${PWD}/artifacts"
         dockerRunArgs: |
@@ -27,9 +27,9 @@ jobs:
           artifact_name: pocketfft-aarch64
         shell: /bin/bash
         run: |
-          apt-get update
-          apt-get install -y clang++-10 clang-10
-          clang++ pocketfft_demo.cc -o pocketfft-aarch64
+          # apt-get update
+          # apt-get install -y clang++-10 clang-10
+          g++ pocketfft_demo.cc -o pocketfft-aarch64
     - name: Show artifacts
       run: |
         ls -al "${PWD}/artifacts"
