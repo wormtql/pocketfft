@@ -29,7 +29,8 @@ jobs:
         run: |
           apt-get -q update
           apt-get install -y clang libc++-dev libc++abi-dev
-          g++ pocketfft_demo.cc -o pocketfft-aarch64
+          clang --version
+          clang++ pocketfft_demo.cc -o pocketfft-aarch64
     - name: Show artifacts
       run: |
         ls -al "${PWD}/artifacts"
