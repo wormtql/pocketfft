@@ -1,0 +1,33 @@
+name: Cross Compile to AArch64
+
+on:
+  push:
+    branches: [ "cpp" ]
+  pull_request:
+    branches: [ "cpp" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: uraimo/run-on-arch-action@v2
+      name: Build
+      id: build
+      with:
+        arch: aarch64
+        distro: ubuntu18.04
+        setup: |
+          mkdir -p "${PWD}/artifacts"
+        dockerRunArgs: |
+          --volume "${PWD}/artifacts:/artifacts"
+        env: | # YAML, but pipe character is necessary
+          artifact_name: pocketfft-aarch64
+        shell: /bin/bash
+        run: |
+          g++ pocketfft_demo.cc -o pocketfft-aarch64
+    - name: Show artifacts
+      run: |
+        ls -al "${PWD}/artifacts"
