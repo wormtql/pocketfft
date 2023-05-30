@@ -27,7 +27,8 @@ jobs:
           artifact_name: pocketfft-aarch64
         shell: /bin/bash
         run: |
-          apt-get install -y g++ gcc build-essentials
+          apt-get update
+          apt-get install -y gcc-10 g++-10
           g++ pocketfft_demo.cc -o pocketfft-aarch64
     - name: Show artifacts
       run: |
